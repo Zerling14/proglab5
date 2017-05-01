@@ -20,11 +20,9 @@ int slen(char *str)
 }
 
 char *str_stok = NULL;
-int p_stok = 0;
 char *stok(char *str, const char *delim)
 {
 	if (str != NULL) {
-		p_stok = 0;
 		str_stok = str;
 	}
 	if (str_stok == NULL) {
@@ -33,8 +31,8 @@ char *stok(char *str, const char *delim)
 	for (int i = p_stok; str_stok[i] != 0; i++) {
 		for (int j = 0; delim[j] != 0; j++) {
 			if (str[i] == delim[j]) {
-				p_stok = i;
-				char * result = str_stok + i;
+				str[i] = 0;
+				str_stok = str + i + 1;
 				return str;
 			}
 		}
