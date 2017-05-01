@@ -1,22 +1,15 @@
 #ifndef STRINGS_H
 #define STRINGS_H
-
-void input();
-
-void check();
-
-void process();
-
-void output();
+#include <stdlib.h>
 
 int slen(char *str);
 
-void stok();
+char *stok(char *str, const char *delim);
 
-void sspn();
+size_t sspn(const char *str, const char *sym);
 
-void scmp();
+int scmp(const char *string1, const char *string2);
 
-void scpy();
+char *scpy(char *destptr, const char *srcptr);
 
 #endif
