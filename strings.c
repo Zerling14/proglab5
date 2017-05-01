@@ -28,26 +28,61 @@ char *stok(char *str, const char *delim)
 	if (str_stok == NULL) {
 		return NULL;
 	}
-	for (int i = p_stok; str_stok[i] != 0; i++) {
+	for (int i = 0; str_stok[i] != 0; i++) {
 		for (int j = 0; delim[j] != 0; j++) {
-			if (str[i] == delim[j]) {
-				str[i] = 0;
-				str_stok = str + i + 1;
-				return str;
+			if (str_stok[i] == delim[j]) {
+				str_stok[i] = 0;
+				char *result = str_stok;
+				str_stok = str_stok + i + 1;
+				return result;
 			}
 		}
+	}
+	if (str_stok != NULL) {
+		char *result = str_stok;
+		str_stok = NULL;
+		return result;
+	} else {
+		return NULL;
 	}
 }
 
 char *scpy(char *destptr, const char *srcptr)
 {
-	for (int i = 0; srcptr[i] != 0; i++) {
+	int i = 0;
+	for (; srcptr[i] != 0; i++) {
 		destptr[i] = srcptr[i];
 	}
 	destptr[i] = 0;
 	return destptr;
 }
 
+int scmp(const char *string1, const char *string2) 
+{
+	for (int i = 0;; i++) {
+		if (string1[i] == 0 && string2[i] == 0) {
+			return 0;
+		}
+		int result = string1[i] - string2[i];
+		if (result != 0) {
+			return result;
+		}
+	}
+	return 0;
+}
+
+size_t sspn(const char *str, const char *sym)
+{
+	size_t result = 0;
+	for (int i = 0; str[i] != 0; i++) {
+		for (int j = 0; sym[j] != 0; j++) {
+			if (str[i] == sym[j]) {
+				result++;
+			}
+		}
+	}
+	return result;
+}
 
 
 
