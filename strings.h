@@ -3,7 +3,7 @@
 
 int slen(char *str);
 
-void stok();
+char *stok(char *str, const char *delim);
 
 void sspn();
 
