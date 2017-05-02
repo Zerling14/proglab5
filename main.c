@@ -89,6 +89,7 @@ void process(char *paths, const char *delim)
 	scat(result_str, str);
 	while ((str = stok(NULL, delim)) != NULL) {
 		scat(result_str, "+");
+		fix_path(str);
 		scat(result_str, str);
 	}
 	scpy(paths, result_str);
