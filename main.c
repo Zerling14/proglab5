@@ -53,7 +53,7 @@ void input(char *paths, char *delim) {
 	scanf("%s", paths);
 }
 
-int check(char *paths, const char *delim)
+int check(char *paths)
 {
 	if (sspn(paths, "*?\"<>|")) {
 		return 1;
@@ -85,10 +85,17 @@ void process(char *paths, const char *delim)
 {
 	char *str = stok(paths, delim);
 	char *result_str = calloc(1000, sizeof(char));
-	fix_path(str);
-	scat(result_str, str);
+	if (!check(str)) {
+		fix_path(str);
+		scat(result_str, str);
+	}
 	while ((str = stok(NULL, delim)) != NULL) {
-		scat(result_str, "+");
+		if (check(str)) {
+			continue;
+		}
+		if (result_str[0] != 0) {
+			scat(result_str, "+");
+		}
 		fix_path(str);
 		scat(result_str, str);
 	}
@@ -106,10 +113,11 @@ int main()
 	char delim[30];
 	char paths[1000];
 	input(paths, delim);
-	if (check(paths, delim)) {
-		printf("Unallowed character\n");
-		return 1;
-	}
+	
+	//if (check(paths)) {
+	//	printf("Unallowed character\n");
+	//	return 1;
+	//}
 	
 	process(paths, delim);
 	
