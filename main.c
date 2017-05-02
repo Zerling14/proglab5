@@ -8,6 +8,11 @@ void fix_path(char * path)
 	char *pos;
 	while((pos = sstr(path, "..")) != NULL) {
 		for (char *i = pos - 2; pos >= 0; i--) {
+			if (*(pos - 2) == ':') {
+				*(pos) = 0;
+				scat(path, pos + 2);
+				break;
+			}
 			if (*i == '/' || *i == '\\') {
 				i++;
 				*i = 0;
