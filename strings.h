@@ -12,4 +12,8 @@ int scmp(const char *string1, const char *string2);
 
 char *scpy(char *destptr, const char *srcptr);
 
+char *scat( char *destptr, const char *srcptr);
+
+char *sstr(char *string1, const char *string2);
+
 #endif
